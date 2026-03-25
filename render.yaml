@@ -28,17 +28,19 @@ services:
       - key: DB_USER
         value: hpromode_user
       - key: DB_PASS
-        sync: false
+        fromService:
+          type: pserv
+          name: hpromode-mysql
+          envVarKey: MYSQL_PASSWORD
       - key: APP_BASE_URL
         sync: false
 
   - type: pserv
     name: hpromode-mysql
-    runtime: image
+    runtime: docker
     plan: starter
     region: frankfurt
-    image:
-      url: docker.io/mysql:8.0
+    dockerfilePath: ./docker/mysql/Dockerfile
     disk:
       name: mysql-data
       mountPath: /var/lib/mysql
