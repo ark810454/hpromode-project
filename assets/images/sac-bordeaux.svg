@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200" role="img" aria-label="Bordeaux luxury bag with fashion editorial styling">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f8edf1"/>
+      <stop offset="55%" stop-color="#fff7f1"/>
+      <stop offset="100%" stop-color="#ecd6cf"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#1e0c13" flood-opacity=".18"/>
+    </filter>
+  </defs>
+  <rect width="900" height="1200" fill="url(#bg)"/>
+  <rect x="76" y="70" width="748" height="1060" rx="34" fill="#fdf8f4" filter="url(#shadow)"/>
+  <rect x="106" y="100" width="688" height="1000" rx="26" fill="none" stroke="#c8a44a" stroke-opacity=".54"/>
+  <circle cx="682" cy="178" r="128" fill="#d8b56d" opacity=".16"/>
+  <circle cx="214" cy="216" r="106" fill="#f0dbe3" opacity=".52"/>
+  <ellipse cx="450" cy="1020" rx="220" ry="46" fill="#24161d" opacity=".12"/>
+  <g transform="translate(126 132)">
+    <g filter="url(#shadow)">
+      <rect x="370" y="188" width="248" height="282" rx="34" fill="#6f1730"/>
+      <rect x="392" y="214" width="204" height="236" rx="24" fill="#7f1f3a"/>
+      <path d="M432 188c4-44 34-70 84-70c54 0 84 26 88 70" fill="none" stroke="#d8b56d" stroke-width="20" stroke-linecap="round"/>
+      <rect x="414" y="276" width="160" height="20" rx="10" fill="#d8b56d"/>
+      <circle cx="496" cy="330" r="18" fill="#fff7f2"/>
+    </g>
+    <g transform="translate(0 40)" filter="url(#shadow)">
+      <path d="M144 80c26-22 58-34 98-34c36 0 66 12 92 34l-12 26H156z" fill="#171419"/>
+      <rect x="202" y="116" width="76" height="96" rx="38" fill="#8f6042"/>
+      <path d="M186 208h108l12 78H174z" fill="#f6dbe1"/>
+      <path d="M144 286c24-24 56-36 96-36c40 0 72 12 96 36l40 108l-56 20l-26-66v260H182V348l-26 66l-56-20z" fill="#f4d8e0"/>
+      <path d="M186 608h112l54 192H130z" fill="#6f1730"/>
+      <path d="M194 800h72l10 48H184z" fill="#181419"/>
+      <path d="M264 800h74l16 48H264z" fill="#181419"/>
+      <path d="M336 336c36 10 58 38 68 82l-42 18c-8-28-22-44-44-50z" fill="#8f6042"/>
+    </g>
+  </g>
+</svg>

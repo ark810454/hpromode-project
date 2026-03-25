@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200" role="img" aria-label="Luxury sunglasses with Congolese sape fashion duo">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f5eef4"/>
+      <stop offset="50%" stop-color="#fff8f2"/>
+      <stop offset="100%" stop-color="#e9eef8"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#130c10" flood-opacity=".18"/>
+    </filter>
+  </defs>
+  <rect width="900" height="1200" fill="url(#bg)"/>
+  <rect x="74" y="72" width="752" height="1056" rx="34" fill="#fef9f3" filter="url(#shadow)"/>
+  <rect x="104" y="102" width="692" height="996" rx="26" fill="none" stroke="#c8a44a" stroke-opacity=".54"/>
+  <circle cx="688" cy="184" r="124" fill="#21448e" opacity=".12"/>
+  <circle cx="206" cy="212" r="104" fill="#f0dce4" opacity=".5"/>
+  <ellipse cx="450" cy="1014" rx="214" ry="44" fill="#24161d" opacity=".12"/>
+  <g transform="translate(154 122)">
+    <g filter="url(#shadow)">
+      <rect x="194" y="112" width="124" height="102" rx="48" fill="#171419"/>
+      <rect x="322" y="112" width="124" height="102" rx="48" fill="#171419"/>
+      <rect x="302" y="148" width="36" height="18" rx="9" fill="#171419"/>
+      <path d="M188 164h-38" stroke="#171419" stroke-width="12" stroke-linecap="round"/>
+      <path d="M452 164h38" stroke="#171419" stroke-width="12" stroke-linecap="round"/>
+      <rect x="212" y="130" width="88" height="70" rx="32" fill="#6f1730" opacity=".86"/>
+      <rect x="340" y="130" width="88" height="70" rx="32" fill="#21448e" opacity=".86"/>
+    </g>
+    <g transform="translate(0 198)" filter="url(#shadow)">
+      <path d="M52 74c24-22 56-34 94-34c34 0 62 12 90 34l-12 22H64z" fill="#111015"/>
+      <rect x="106" y="108" width="76" height="94" rx="38" fill="#8a5f48"/>
+      <path d="M90 198h110l12 76H78z" fill="#f7e0e7"/>
+      <path d="M52 274c22-24 50-36 82-36c34 0 62 12 84 36l38 98l-52 20l-22-54v236H80V338l-22 54l-52-20z" fill="#f0d9e1"/>
+      <path d="M80 574h104l46 172H26z" fill="#6f1730"/>
+      <path d="M88 746h70l10 44H80z" fill="#181419"/>
+      <path d="M154 746h72l16 44H154z" fill="#181419"/>
+      <rect x="92" y="138" width="34" height="18" rx="9" fill="#171419"/>
+      <rect x="152" y="138" width="34" height="18" rx="9" fill="#171419"/>
+    </g>
+    <g transform="translate(314 164)" filter="url(#shadow)">
+      <path d="M58 74c26-24 60-36 102-36c36 0 68 12 94 36l-14 24H72z" fill="#111015"/>
+      <rect x="118" y="108" width="80" height="96" rx="40" fill="#915f43"/>
+      <path d="M102 202h112l14 80H88z" fill="#fff9f1"/>
+      <path d="M62 282c24-24 56-36 96-36c38 0 70 12 94 36l42 102l-54 20l-24-56v236H100V348l-24 56l-54-20z" fill="#21448e"/>
+      <path d="M102 584h120l-8 184H112z" fill="#fff9f1"/>
+      <path d="M116 768h72l10 44H108z" fill="#181419"/>
+      <path d="M182 768h74l14 44H182z" fill="#181419"/>
+      <rect x="110" y="136" width="34" height="18" rx="9" fill="#171419"/>
+      <rect x="170" y="136" width="34" height="18" rx="9" fill="#171419"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,54 @@
+services:
+  - type: web
+    name: hpromode-web
+    runtime: docker
+    plan: free
+    region: frankfurt
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_NAME
+        value: HPROMODE
+      - key: APP_TAGLINE
+        value: Elegance Redefinie
+      - key: APP_SUPPORT_EMAIL
+        value: contact@hpromode.com
+      - key: APP_SUPPORT_PHONE
+        value: +2348005550101
+      - key: DB_HOST
+        fromService:
+          type: pserv
+          name: hpromode-mysql
+          property: host
+      - key: DB_PORT
+        value: 3306
+      - key: DB_NAME
+        value: hpromode
+      - key: DB_USER
+        value: hpromode_user
+      - key: DB_PASS
+        sync: false
+      - key: APP_BASE_URL
+        sync: false
+
+  - type: pserv
+    name: hpromode-mysql
+    runtime: image
+    plan: starter
+    region: frankfurt
+    image:
+      url: docker.io/mysql:8.0
+    disk:
+      name: mysql-data
+      mountPath: /var/lib/mysql
+      sizeGB: 10
+    envVars:
+      - key: MYSQL_DATABASE
+        value: hpromode
+      - key: MYSQL_USER
+        value: hpromode_user
+      - key: MYSQL_PASSWORD
+        sync: false
+      - key: MYSQL_ROOT_PASSWORD
+        sync: false

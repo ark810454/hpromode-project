@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1100" role="img" aria-label="Luxury HPROMODE campaign inspired by Congolese sapeurs">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3f0f1d"/>
+      <stop offset="45%" stop-color="#711730"/>
+      <stop offset="100%" stop-color="#21448e"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f8eef1" stop-opacity=".96"/>
+      <stop offset="100%" stop-color="#eadcc9" stop-opacity=".92"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f1deb0"/>
+      <stop offset="100%" stop-color="#c9a34a"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="24" stdDeviation="28" flood-color="#16080d" flood-opacity=".22"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="1100" fill="url(#bg)"/>
+  <circle cx="1320" cy="170" r="190" fill="#d7b56a" opacity=".18"/>
+  <circle cx="240" cy="160" r="160" fill="#f0d7df" opacity=".15"/>
+  <path d="M0 760C220 700 420 700 640 770C840 832 1040 858 1260 796C1388 760 1500 736 1600 742V1100H0Z" fill="#f7efe4"/>
+  <path d="M0 848C208 804 420 810 656 884C906 960 1228 944 1600 836V1100H0Z" fill="#eadfce"/>
+  <g filter="url(#shadow)">
+    <rect x="144" y="132" width="1312" height="726" rx="40" fill="url(#panel)" opacity=".16"/>
+    <rect x="174" y="164" width="1252" height="662" rx="28" fill="none" stroke="#ffffff" stroke-opacity=".16"/>
+  </g>
+  <g opacity=".95">
+    <rect x="218" y="216" width="194" height="422" rx="24" fill="#f8f1ea" fill-opacity=".9"/>
+    <rect x="1190" y="216" width="194" height="422" rx="24" fill="#f8f1ea" fill-opacity=".9"/>
+    <rect x="244" y="246" width="142" height="18" rx="9" fill="#c8a44a" opacity=".75"/>
+    <rect x="1216" y="246" width="142" height="18" rx="9" fill="#c8a44a" opacity=".75"/>
+  </g>
+  <g opacity=".68">
+    <path d="M312 342c24 16 38 41 38 74v118h-76V416c0-33 14-58 38-74z" fill="#d8c8b6"/>
+    <rect x="286" y="534" width="52" height="78" rx="20" fill="#d8c8b6"/>
+    <path d="M1284 340c24 18 38 42 38 76v118h-76V416c0-34 14-58 38-76z" fill="#d8c8b6"/>
+    <rect x="1258" y="534" width="52" height="78" rx="20" fill="#d8c8b6"/>
+  </g>
+  <g transform="translate(520 202)" filter="url(#shadow)">
+    <ellipse cx="256" cy="590" rx="304" ry="52" fill="#261720" opacity=".18"/>
+    <g transform="translate(0 18)">
+      <path d="M178 82c22-20 52-30 84-30c31 0 60 10 82 30c-4 18-12 32-24 43h-118c-12-11-20-25-24-43z" fill="#141114"/>
+      <rect x="220" y="124" width="80" height="92" rx="36" fill="#8a5f48"/>
+      <path d="M210 210h100l16 94h-132z" fill="#f4d7de"/>
+      <path d="M162 304c22-30 54-44 94-44h4c40 0 72 14 94 44l52 118l-58 20l-34-78v230h-118V364l-34 78l-58-20z" fill="#7c1833"/>
+      <path d="M198 594h116l44 190H150z" fill="#f2cfd8"/>
+      <path d="M208 784h58l12 62h-74z" fill="#1c181d"/>
+      <path d="M280 784h58l18 62h-78z" fill="#1c181d"/>
+      <circle cx="230" cy="164" r="5" fill="#c8a44a"/>
+      <circle cx="290" cy="164" r="5" fill="#c8a44a"/>
+      <path d="M348 468c36 12 58 39 64 82l-44 18c-7-32-20-51-40-58z" fill="#f4d7de"/>
+      <rect x="370" y="550" width="78" height="66" rx="16" fill="#6f1730"/>
+      <rect x="384" y="532" width="50" height="20" rx="10" fill="#c8a44a"/>
+    </g>
+    <g transform="translate(264 0)">
+      <path d="M190 92c26-26 60-40 102-40c44 0 80 14 108 40l-14 30H204z" fill="#19366d"/>
+      <rect x="250" y="126" width="92" height="102" rx="42" fill="#915f43"/>
+      <path d="M232 230h126l16 82H216z" fill="#fbf2e9"/>
+      <path d="M182 312c28-32 64-48 112-48c48 0 84 16 112 48l54 118l-58 22l-34-74v216H220V378l-34 74l-58-22z" fill="#21448e"/>
+      <path d="M250 312l42 58l44-58l22 28l-52 74h-28l-50-74z" fill="#f4d7de"/>
+      <rect x="286" y="232" width="18" height="94" fill="#c8a44a"/>
+      <path d="M220 594h150l-20 208H240z" fill="#fff8f1"/>
+      <path d="M248 800h68l8 46h-84z" fill="#1a171b"/>
+      <path d="M320 800h66l20 46h-88z" fill="#1a171b"/>
+      <path d="M376 354c42 10 68 38 76 82l-44 20c-8-28-23-47-46-54z" fill="#915f43"/>
+      <circle cx="425" cy="504" r="42" fill="url(#gold)"/>
+      <circle cx="425" cy="504" r="18" fill="#fbf7f0"/>
+    </g>
+  </g>
+</svg>

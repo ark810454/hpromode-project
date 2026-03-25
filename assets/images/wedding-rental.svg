@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1100" role="img" aria-label="HPROMODE wedding dress rental luxury editorial campaign">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#240f18"/>
+      <stop offset="45%" stop-color="#7a1f3f"/>
+      <stop offset="100%" stop-color="#3559a4"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fff8f1"/>
+      <stop offset="100%" stop-color="#f3dfd3"/>
+    </linearGradient>
+    <linearGradient id="dress" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fffdfb"/>
+      <stop offset="100%" stop-color="#f5dfe3"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f0ddb1"/>
+      <stop offset="100%" stop-color="#c9a34a"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="22" stdDeviation="24" flood-color="#14080e" flood-opacity=".22"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="1100" fill="url(#bg)"/>
+  <circle cx="220" cy="170" r="180" fill="#f1d7df" opacity=".14"/>
+  <circle cx="1360" cy="220" r="200" fill="#d2ae62" opacity=".16"/>
+  <path d="M0 840C216 772 454 786 672 856C920 936 1224 938 1600 816V1100H0Z" fill="#f8efe6"/>
+  <path d="M0 916C280 868 520 888 772 956C1028 1024 1284 1012 1600 922V1100H0Z" fill="#efdfd1"/>
+  <g filter="url(#shadow)">
+    <rect x="168" y="128" width="1264" height="752" rx="42" fill="url(#panel)" opacity=".14"/>
+    <rect x="198" y="160" width="1204" height="688" rx="28" fill="none" stroke="#fff" stroke-opacity=".14"/>
+  </g>
+  <g opacity=".9">
+    <rect x="208" y="220" width="210" height="432" rx="28" fill="#fbf3ea" fill-opacity=".94"/>
+    <rect x="1182" y="220" width="210" height="432" rx="28" fill="#fbf3ea" fill-opacity=".94"/>
+    <rect x="236" y="252" width="154" height="18" rx="9" fill="url(#gold)" opacity=".76"/>
+    <rect x="1210" y="252" width="154" height="18" rx="9" fill="url(#gold)" opacity=".76"/>
+  </g>
+  <g opacity=".56">
+    <circle cx="324" cy="514" r="70" fill="#d9c8ba"/>
+    <circle cx="1284" cy="514" r="70" fill="#d9c8ba"/>
+    <rect x="292" y="582" width="64" height="168" rx="20" fill="#d9c8ba"/>
+    <rect x="1252" y="582" width="64" height="168" rx="20" fill="#d9c8ba"/>
+  </g>
+  <g transform="translate(480 126)" filter="url(#shadow)">
+    <ellipse cx="326" cy="716" rx="286" ry="56" fill="#1d1118" opacity=".16"/>
+    <path d="M286 120c26-26 58-40 100-40c40 0 72 14 98 40l-16 46H302z" fill="#171216"/>
+    <rect x="344" y="168" width="88" height="110" rx="42" fill="#94634a"/>
+    <path d="M332 276h114l16 84H316z" fill="#fbf2ec"/>
+    <path d="M282 354c32-28 70-42 118-42c46 0 84 14 118 42l66 164l-70 24l-40-100v200l88 162H208l86-162V442l-40 100l-70-24z" fill="url(#dress)"/>
+    <path d="M338 364l42 58l42-58l28 28l-52 78h-38l-50-78z" fill="#e8c6d0"/>
+    <rect x="384" y="278" width="10" height="98" fill="url(#gold)"/>
+    <circle cx="388" cy="312" r="8" fill="#d0ad58"/>
+    <path d="M234 804h312l-20 56H256z" fill="#fff8f2"/>
+    <path d="M286 858h88l12 48h-112z" fill="#1b171b"/>
+    <path d="M414 858h94l20 48H410z" fill="#1b171b"/>
+    <path d="M536 402c54 12 88 42 98 96l-56 24c-10-34-30-58-60-70z" fill="#f1e3e6"/>
+    <path d="M166 402c-54 12-88 42-98 96l56 24c10-34 30-58 60-70z" fill="#f1e3e6"/>
+    <path d="M468 226c20-8 38-12 54-12c62 0 118 54 146 142l-42 18c-28-62-68-98-122-108z" fill="#ffffff" fill-opacity=".64"/>
+  </g>
+  <g transform="translate(1060 196)">
+    <rect x="0" y="0" width="214" height="120" rx="28" fill="#140c11" fill-opacity=".5" stroke="#fff" stroke-opacity=".14"/>
+    <text x="32" y="46" fill="#f0ddb1" font-family="Georgia, serif" font-size="22" letter-spacing="4">ATELIER</text>
+    <text x="32" y="82" fill="#ffffff" font-family="Georgia, serif" font-size="34">Location Mariage</text>
+  </g>
+</svg>

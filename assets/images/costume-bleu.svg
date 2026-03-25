@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200" role="img" aria-label="Royal blue suit inspired by Congolese sape culture">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#eef2fc"/>
+      <stop offset="52%" stop-color="#fff9f3"/>
+      <stop offset="100%" stop-color="#e8d9cf"/>
+    </linearGradient>
+    <linearGradient id="suit" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2c5cb7"/>
+      <stop offset="100%" stop-color="#193d82"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#091121" flood-opacity=".2"/>
+    </filter>
+  </defs>
+  <rect width="900" height="1200" fill="url(#bg)"/>
+  <rect x="76" y="72" width="748" height="1056" rx="34" fill="#fbf6ef" filter="url(#shadow)"/>
+  <rect x="108" y="104" width="684" height="992" rx="24" fill="none" stroke="#c8a44a" stroke-opacity=".58"/>
+  <circle cx="698" cy="184" r="128" fill="#2c5cb7" opacity=".12"/>
+  <circle cx="208" cy="194" r="102" fill="#f1dde2" opacity=".5"/>
+  <ellipse cx="448" cy="1010" rx="210" ry="42" fill="#1b161c" opacity=".12"/>
+  <g transform="translate(208 118)" filter="url(#shadow)">
+    <path d="M186 82c26-26 66-40 116-40c46 0 86 14 116 40l-16 28H202z" fill="#111015"/>
+    <rect x="246" y="118" width="92" height="106" rx="42" fill="#8a5f48"/>
+    <path d="M228 220h128l16 90H212z" fill="#fffaf2"/>
+    <path d="M184 310c30-28 68-42 108-42c40 0 78 14 108 42l54 118l-58 22l-34-72v236H222V378l-34 72l-58-22z" fill="url(#suit)"/>
+    <path d="M232 310l60 86l62-86l26 32l-64 94h-52l-58-94z" fill="#ffffff"/>
+    <rect x="282" y="220" width="18" height="112" fill="#c8a44a"/>
+    <path d="M238 614h130l-12 282H246z" fill="#fff9f3"/>
+    <path d="M250 896h78l12 52H238z" fill="#171419"/>
+    <path d="M316 896h78l18 52H312z" fill="#171419"/>
+    <path d="M186 418c-4 72-18 128-44 168l50 30c18-24 34-60 44-102" fill="#8a5f48"/>
+    <rect x="112" y="584" width="112" height="92" rx="18" fill="#21448e"/>
+    <rect x="138" y="560" width="60" height="24" rx="12" fill="#c8a44a"/>
+    <circle cx="286" cy="160" r="6" fill="#c8a44a"/>
+  </g>
+</svg>

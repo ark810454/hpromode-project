@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200" role="img" aria-label="Royal blue bag in a premium Congolese fashion campaign">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#eef3fd"/>
+      <stop offset="52%" stop-color="#fff8f2"/>
+      <stop offset="100%" stop-color="#ead8cf"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#08101f" flood-opacity=".18"/>
+    </filter>
+  </defs>
+  <rect width="900" height="1200" fill="url(#bg)"/>
+  <rect x="74" y="72" width="752" height="1056" rx="34" fill="#fcf8f2" filter="url(#shadow)"/>
+  <rect x="104" y="102" width="692" height="996" rx="26" fill="none" stroke="#c8a44a" stroke-opacity=".54"/>
+  <circle cx="688" cy="180" r="122" fill="#21448e" opacity=".14"/>
+  <circle cx="208" cy="204" r="98" fill="#f0dbe3" opacity=".44"/>
+  <ellipse cx="448" cy="1014" rx="212" ry="44" fill="#23161b" opacity=".12"/>
+  <g transform="translate(120 124)">
+    <g filter="url(#shadow)">
+      <rect x="384" y="202" width="238" height="266" rx="32" fill="#21448e"/>
+      <rect x="406" y="226" width="194" height="220" rx="22" fill="#2b58b3"/>
+      <path d="M444 202c4-42 32-66 76-66c50 0 76 24 80 66" fill="none" stroke="#d8b56d" stroke-width="18" stroke-linecap="round"/>
+      <rect x="430" y="286" width="150" height="18" rx="9" fill="#d8b56d"/>
+      <circle cx="506" cy="332" r="16" fill="#fff8f2"/>
+    </g>
+    <g transform="translate(0 42)" filter="url(#shadow)">
+      <path d="M152 74c28-24 66-36 112-36c40 0 74 12 102 36l-12 26H164z" fill="#111015"/>
+      <rect x="220" y="112" width="84" height="100" rx="40" fill="#8a5f48"/>
+      <path d="M204 208h116l14 84H190z" fill="#fff8f1"/>
+      <path d="M158 292c28-28 64-42 104-42c40 0 76 14 104 42l46 112l-58 20l-28-66v258H198V358l-28 66l-58-20z" fill="#f8efe7"/>
+      <path d="M198 616h132l-10 194H212z" fill="#21448e"/>
+      <path d="M214 810h74l10 46H206z" fill="#181419"/>
+      <path d="M286 810h76l16 46H286z" fill="#181419"/>
+      <path d="M360 334c34 10 56 34 70 74l-46 18c-8-24-20-38-42-44z" fill="#8a5f48"/>
+    </g>
+  </g>
+</svg>
