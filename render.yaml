@@ -33,7 +33,7 @@ services:
           name: hpromode-mysql
           envVarKey: MYSQL_PASSWORD
       - key: APP_BASE_URL
-        sync: false
+        value: ""
 
   - type: pserv
     name: hpromode-mysql
