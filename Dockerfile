@@ -1,10 +1,7 @@
 FROM php:8.2-apache
 
-RUN apt-get update && apt-get install -y \
-    unzip \
-    && docker-php-ext-install pdo pdo_mysql mbstring \
-    && a2enmod rewrite \
-    && rm -rf /var/lib/apt/lists/*
+RUN docker-php-ext-install pdo pdo_mysql mbstring \
+    && a2enmod rewrite
 
 WORKDIR /var/www/html
 
