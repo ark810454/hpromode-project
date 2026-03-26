@@ -20,9 +20,9 @@ services:
         fromService:
           type: pserv
           name: hpromode-mysql
-          property: host
+          property: hostport
       - key: DB_PORT
-        value: 3306
+        value: ""
       - key: DB_NAME
         value: hpromode
       - key: DB_USER

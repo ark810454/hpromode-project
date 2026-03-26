@@ -8,6 +8,14 @@ $dbname = env_value('DB_NAME', 'hpromode');
 $username = env_value('DB_USER', 'root');
 $password = env_value('DB_PASS', '');
 
+if (strpos($host, ':') !== false) {
+    $hostParts = explode(':', $host, 2);
+    $host = trim($hostParts[0]);
+    if (isset($hostParts[1]) && $hostParts[1] !== '') {
+        $port = (int) $hostParts[1];
+    }
+}
+
 function schema_check_query_exists($pdo, $sql)
 {
     $statement = $pdo->query($sql);
