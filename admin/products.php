@@ -1,6 +1,9 @@
 <?php
 $pageTitle = 'Articles';
-require_once __DIR__ . '/includes_top.php';
+require_once __DIR__ . '/../config/db.php';
+require_once __DIR__ . '/../includes/functions.php';
+
+require_admin();
 
 $editingProduct = null;
 
@@ -80,6 +83,8 @@ $products = $pdo->query(
      JOIN categories c ON c.id = p.category_id
      ORDER BY p.created_at DESC'
 )->fetchAll();
+
+require_once __DIR__ . '/includes_top.php';
 ?>
 
 <div class="row g-4">
