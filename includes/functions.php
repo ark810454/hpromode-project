@@ -98,9 +98,20 @@ function format_price($price)
     return number_format((float) $price, 2, ',', ' ') . ' $';
 }
 
+function hpromode_lower($value)
+{
+    $value = trim((string) $value);
+
+    if (function_exists('mb_strtolower')) {
+        return mb_strtolower($value, 'UTF-8');
+    }
+
+    return strtolower($value);
+}
+
 function generate_slug($value)
 {
-    $value = trim(mb_strtolower($value, 'UTF-8'));
+    $value = hpromode_lower($value);
     $map = array(
         'à' => 'a', 'á' => 'a', 'â' => 'a', 'ä' => 'a',
         'ç' => 'c',
@@ -120,7 +131,7 @@ function generate_slug($value)
 
 function badge_class($status)
 {
-    $normalized = mb_strtolower(trim((string) $status), 'UTF-8');
+    $normalized = hpromode_lower($status);
 
     switch ($normalized) {
         case 'validé':
@@ -399,8 +410,8 @@ function calculate_cart_totals($pdo)
 
 function determine_delivery_fee($method, $zone)
 {
-    $method = mb_strtolower(trim((string) $method), 'UTF-8');
-    $zone = mb_strtolower(trim((string) $zone), 'UTF-8');
+    $method = hpromode_lower($method);
+    $zone = hpromode_lower($zone);
 
     if ($method === 'retrait boutique') {
         return 0;
