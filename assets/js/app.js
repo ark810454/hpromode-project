@@ -185,6 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const files = Array.from(galleryInput.files || []);
                 const preparedImages = [];
                 const newPreviewCards = [];
+                galleryPreviewList.querySelectorAll('.admin-gallery-card.is-new').forEach((card) => card.remove());
 
                 if (!files.length) {
                     galleryData.value = '';

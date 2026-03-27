@@ -40,6 +40,25 @@ function asset_url($path)
     return base_url('assets/' . ltrim((string) $path, '/'));
 }
 
+function media_url($path, $fallback = '')
+{
+    $path = trim((string) $path);
+
+    if ($path === '') {
+        return $fallback;
+    }
+
+    if (preg_match('#^(https?:)?//#i', $path) === 1 || strpos($path, 'data:image/') === 0) {
+        return $path;
+    }
+
+    if (strpos($path, 'assets/') === 0) {
+        return base_url($path);
+    }
+
+    return base_url(ltrim($path, '/'));
+}
+
 function uploads_relative_dir()
 {
     return 'assets/images/uploads';
@@ -174,6 +193,25 @@ function require_admin()
 function format_price($price)
 {
     return number_format((float) $price, 2, ',', ' ') . ' $';
+}
+
+function excerpt_text($value, $length = 90, $suffix = '...')
+{
+    $value = trim(strip_tags((string) $value));
+
+    if ($value === '') {
+        return '';
+    }
+
+    if (function_exists('mb_strimwidth')) {
+        return mb_strimwidth($value, 0, (int) $length, $suffix, 'UTF-8');
+    }
+
+    if (strlen($value) <= (int) $length) {
+        return $value;
+    }
+
+    return rtrim(substr($value, 0, max(0, (int) $length - strlen($suffix)))) . $suffix;
 }
 
 function hpromode_lower($value)

@@ -159,6 +159,36 @@ $categoryThemes = array(
 );
 
 $activeTheme = isset($categoryThemes[$categorySlug]) ? $categoryThemes[$categorySlug] : $categoryThemes['default'];
+$categoryThemeImages = array();
+
+foreach ($products as $product) {
+    if (!isset($categoryThemeImages[$product['category_slug']])) {
+        $categoryThemeImages[$product['category_slug']] = $product['main_image'];
+    }
+}
+
+foreach ($categories as $category) {
+    if (!isset($categoryThemeImages[$category['slug']])) {
+        $statement = $pdo->prepare(
+            "SELECT main_image
+             FROM products p
+             JOIN categories c ON c.id = p.category_id
+             WHERE c.slug = ? AND p.is_active = 1
+             ORDER BY p.is_featured DESC, p.is_new DESC, p.created_at DESC
+             LIMIT 1"
+        );
+        $statement->execute(array($category['slug']));
+        $image = $statement->fetchColumn();
+
+        if ($image) {
+            $categoryThemeImages[$category['slug']] = $image;
+        }
+    }
+}
+
+if ($categorySlug !== '' && isset($categoryThemeImages[$categorySlug])) {
+    $activeTheme['image'] = $categoryThemeImages[$categorySlug];
+}
 $pageTitle = $categorySlug !== '' && isset($categoryThemes[$categorySlug]) ? ucfirst($categorySlug) : 'Boutique';
 $queryParams = $_GET;
 
@@ -183,7 +213,7 @@ require_once __DIR__ . '/includes/header.php';
                     </div>
                 </div>
                 <div class="catalog-hero-media">
-                    <img src="<?= e($activeTheme['image']) ?>" alt="<?= e($activeTheme['label']) ?>">
+                    <img src="<?= e(media_url($activeTheme['image'])) ?>" alt="<?= e($activeTheme['label']) ?>">
                 </div>
             </div>
         </div>
@@ -199,7 +229,7 @@ require_once __DIR__ . '/includes/header.php';
                 $isActiveCategory = $categorySlug === $category['slug'];
                 ?>
                 <a class="category-shortcut <?= $isActiveCategory ? 'is-active' : '' ?>" href="<?= e(base_url('shop.php?category=' . urlencode($category['slug']))) ?>">
-                    <img src="<?= e($theme['image']) ?>" alt="<?= e($category['name']) ?>">
+                    <img src="<?= e(media_url(array_value($categoryThemeImages, $category['slug'], $theme['image']))) ?>" alt="<?= e($category['name']) ?>">
                     <span><?= e($category['name']) ?></span>
                 </a>
             <?php endforeach; ?>
@@ -341,14 +371,14 @@ require_once __DIR__ . '/includes/header.php';
                             <article class="product-card reveal-up">
                                 <a class="product-card-link" href="<?= e(base_url('product-details.php?id=' . (int) $product['id'])) ?>">
                                     <div class="product-card-media">
-                                        <img src="<?= e($product['main_image']) ?>" alt="<?= e($product['name']) ?>">
+                                        <img src="<?= e(media_url($product['main_image'])) ?>" alt="<?= e($product['name']) ?>">
                                         <span class="product-chip"><?= e($product['category_name']) ?></span>
                                     </div>
                                     <div class="product-card-body">
                                         <div class="product-card-header">
                                             <div>
                                                 <h3><?= e($product['name']) ?></h3>
-                                                <p><?= e(mb_strimwidth($product['description'], 0, 90, '...')) ?></p>
+                                                <p><?= e(excerpt_text($product['description'], 90)) ?></p>
                                             </div>
                                             <?php if (!empty($product['promo_price'])): ?>
                                                 <span class="product-badge">Promo</span>

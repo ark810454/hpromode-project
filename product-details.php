@@ -82,7 +82,7 @@ require_once __DIR__ . '/includes/header.php';
             <div class="product-stage-gallery reveal-up">
                 <div class="product-gallery-main">
                     <img
-                        src="<?= e($gallery[0]['image_path']) ?>"
+                        src="<?= e(media_url($gallery[0]['image_path'])) ?>"
                         alt="<?= e($gallery[0]['alt_text'] ?: $product['name']) ?>"
                         data-gallery-main
                     >
@@ -94,10 +94,10 @@ require_once __DIR__ . '/includes/header.php';
                                 type="button"
                                 class="thumb-button <?= $index === 0 ? 'is-active' : '' ?>"
                                 data-gallery-thumb
-                                data-image="<?= e($image['image_path']) ?>"
+                                data-image="<?= e(media_url($image['image_path'])) ?>"
                                 data-alt="<?= e($image['alt_text'] ?: $product['name']) ?>"
                             >
-                                <img src="<?= e($image['image_path']) ?>" alt="<?= e($image['alt_text'] ?: $product['name']) ?>">
+                                <img src="<?= e(media_url($image['image_path'])) ?>" alt="<?= e($image['alt_text'] ?: $product['name']) ?>">
                             </button>
                         <?php endforeach; ?>
                     </div>
@@ -220,14 +220,14 @@ require_once __DIR__ . '/includes/header.php';
                 <article class="product-card reveal-up">
                     <a class="product-card-link" href="<?= e(base_url('product-details.php?id=' . (int) $complete['id'])) ?>">
                         <div class="product-card-media">
-                            <img src="<?= e($complete['main_image']) ?>" alt="<?= e($complete['name']) ?>">
+                            <img src="<?= e(media_url($complete['main_image'])) ?>" alt="<?= e($complete['name']) ?>">
                             <span class="product-chip"><?= e($complete['category_name']) ?></span>
                         </div>
                         <div class="product-card-body">
                             <div class="product-card-header">
                                 <div>
                                     <h3><?= e($complete['name']) ?></h3>
-                                    <p><?= e(mb_strimwidth($complete['description'], 0, 80, '...')) ?></p>
+                                    <p><?= e(excerpt_text($complete['description'], 80)) ?></p>
                                 </div>
                             </div>
                             <div class="product-card-footer">
@@ -255,14 +255,14 @@ require_once __DIR__ . '/includes/header.php';
                 <article class="product-card reveal-up">
                     <a class="product-card-link" href="<?= e(base_url('product-details.php?id=' . (int) $related['id'])) ?>">
                         <div class="product-card-media">
-                            <img src="<?= e($related['main_image']) ?>" alt="<?= e($related['name']) ?>">
+                            <img src="<?= e(media_url($related['main_image'])) ?>" alt="<?= e($related['name']) ?>">
                             <span class="product-chip"><?= e($product['category_name']) ?></span>
                         </div>
                         <div class="product-card-body">
                             <div class="product-card-header">
                                 <div>
                                     <h3><?= e($related['name']) ?></h3>
-                                    <p><?= e(mb_strimwidth($related['description'], 0, 80, '...')) ?></p>
+                                    <p><?= e(excerpt_text($related['description'], 80)) ?></p>
                                 </div>
                             </div>
                             <div class="product-card-footer">

@@ -173,7 +173,7 @@ require_once __DIR__ . '/includes_top.php';
                         <div class="admin-media-preview-wrap">
                             <div class="admin-media-preview-frame">
                                 <img
-                                    src="<?= e(array_value($editingProduct, 'main_image', $defaultProductImage)) ?>"
+                                    src="<?= e(media_url(array_value($editingProduct, 'main_image', $defaultProductImage), $defaultProductImage)) ?>"
                                     alt="Prévisualisation de l’image principale"
                                     data-main-image-preview
                                 >
@@ -185,15 +185,15 @@ require_once __DIR__ . '/includes_top.php';
                             <input type="file" class="form-control" accept="image/*" data-main-image-file>
                             <div class="row g-3 mt-1">
                                 <div class="col-md-4">
-                                    <label class="form-label small">Zoom</label>
+                                    <label class="form-label small admin-slider-label">Zoom</label>
                                     <input type="range" class="form-range" min="1" max="2.4" step="0.05" value="1" data-crop-scale>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="form-label small">Décalage horizontal</label>
+                                    <label class="form-label small admin-slider-label">Décalage horizontal</label>
                                     <input type="range" class="form-range" min="-160" max="160" step="1" value="0" data-crop-offset-x>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="form-label small">Décalage vertical</label>
+                                    <label class="form-label small admin-slider-label">Décalage vertical</label>
                                     <input type="range" class="form-range" min="-200" max="200" step="1" value="0" data-crop-offset-y>
                                 </div>
                             </div>
@@ -212,7 +212,7 @@ require_once __DIR__ . '/includes_top.php';
                     <div class="admin-gallery-grid mt-3" data-gallery-preview-list>
                         <?php foreach ($productGallery as $galleryImage): ?>
                             <div class="admin-gallery-card">
-                                <img src="<?= e($galleryImage['image_path']) ?>" alt="<?= e(array_value($galleryImage, 'alt_text', 'Galerie produit')) ?>">
+                                <img src="<?= e(media_url($galleryImage['image_path'], $defaultProductImage)) ?>" alt="<?= e(array_value($galleryImage, 'alt_text', 'Galerie produit')) ?>">
                                 <span>Déjà publié</span>
                             </div>
                         <?php endforeach; ?>
@@ -270,7 +270,7 @@ require_once __DIR__ . '/includes_top.php';
                             <tr>
                                 <td>
                                     <div class="admin-product-listing">
-                                        <img src="<?= e(array_value($product, 'main_image', $defaultProductImage)) ?>" alt="<?= e($product['name']) ?>">
+                                        <img src="<?= e(media_url(array_value($product, 'main_image', $defaultProductImage), $defaultProductImage)) ?>" alt="<?= e($product['name']) ?>">
                                         <div>
                                             <strong><?= e($product['name']) ?></strong>
                                             <div class="small-muted"><?= e($product['sku']) ?></div>

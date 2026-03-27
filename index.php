@@ -21,6 +21,21 @@ $newArrivals = $pdo->query(
 )->fetchAll();
 
 $promotion = get_active_promotion($pdo);
+$categoryHeroImages = array();
+
+$categoryVisualStatement = $pdo->query(
+    "SELECT c.slug, p.main_image
+     FROM categories c
+     JOIN products p ON p.category_id = c.id
+     WHERE p.is_active = 1
+     ORDER BY p.is_featured DESC, p.is_new DESC, p.created_at DESC"
+);
+
+foreach ($categoryVisualStatement->fetchAll() as $row) {
+    if (!isset($categoryHeroImages[$row['slug']])) {
+        $categoryHeroImages[$row['slug']] = $row['main_image'];
+    }
+}
 ?>
 
 <section class="home-hero home-hero-structured">
@@ -115,7 +130,7 @@ $promotion = get_active_promotion($pdo);
         <div class="editorial-grid">
             <a class="editorial-card editorial-card-feature reveal-up" href="<?= e(base_url('shop.php?category=robes')) ?>">
                 <div class="editorial-card-media">
-                    <img src="<?= e(asset_url('images/robe-rose.svg')) ?>" alt="Selection femme HPROMODE">
+                    <img src="<?= e(media_url(array_value($categoryHeroImages, 'robes', asset_url('images/robe-rose.svg')))) ?>" alt="Selection femme HPROMODE">
                 </div>
                 <div class="editorial-card-body">
                     <span class="eyebrow">Selection femme</span>
@@ -125,7 +140,7 @@ $promotion = get_active_promotion($pdo);
             </a>
             <a class="editorial-card reveal-up" href="<?= e(base_url('shop.php?category=costumes')) ?>">
                 <div class="editorial-card-media">
-                    <img src="<?= e(asset_url('images/costume-bleu.svg')) ?>" alt="Selection homme HPROMODE">
+                    <img src="<?= e(media_url(array_value($categoryHeroImages, 'costumes', asset_url('images/costume-bleu.svg')))) ?>" alt="Selection homme HPROMODE">
                 </div>
                 <div class="editorial-card-body">
                     <span class="eyebrow">Selection homme</span>
@@ -135,7 +150,7 @@ $promotion = get_active_promotion($pdo);
             </a>
             <a class="editorial-card reveal-up" href="<?= e(base_url('shop.php?category=sacs')) ?>">
                 <div class="editorial-card-media">
-                    <img src="<?= e(asset_url('images/sac-bordeaux.svg')) ?>" alt="Accessoires premium HPROMODE">
+                    <img src="<?= e(media_url(array_value($categoryHeroImages, 'sacs', asset_url('images/sac-bordeaux.svg')))) ?>" alt="Accessoires premium HPROMODE">
                 </div>
                 <div class="editorial-card-body">
                     <span class="eyebrow">Accessoires premium</span>
@@ -161,14 +176,14 @@ $promotion = get_active_promotion($pdo);
                 <article class="product-card reveal-up">
                     <a class="product-card-link" href="<?= e(base_url('product-details.php?id=' . (int) $product['id'])) ?>">
                         <div class="product-card-media">
-                            <img src="<?= e($product['main_image']) ?>" alt="<?= e($product['name']) ?>">
+                            <img src="<?= e(media_url($product['main_image'])) ?>" alt="<?= e($product['name']) ?>">
                             <span class="product-chip"><?= e($product['category_name']) ?></span>
                         </div>
                         <div class="product-card-body">
                             <div class="product-card-header">
                                 <div>
                                     <h3><?= e($product['name']) ?></h3>
-                                    <p><?= e(mb_strimwidth($product['description'], 0, 90, '...')) ?></p>
+                                    <p><?= e(excerpt_text($product['description'], 90)) ?></p>
                                 </div>
                                 <?php if (!empty($product['promo_price'])): ?>
                                     <span class="product-badge">Promo</span>
@@ -210,21 +225,21 @@ $promotion = get_active_promotion($pdo);
                 </div>
             </article>
             <article class="lookbook-frame reveal-up">
-                <img src="<?= e(asset_url('images/robe-bordeaux.svg')) ?>" alt="Lookbook robes">
+                <img src="<?= e(media_url(array_value($categoryHeroImages, 'robes', asset_url('images/robe-bordeaux.svg')))) ?>" alt="Lookbook robes">
                 <div class="lookbook-frame-copy">
                     <span class="eyebrow">Robes</span>
                     <h3>Feminite couture</h3>
                 </div>
             </article>
             <article class="lookbook-frame reveal-up">
-                <img src="<?= e(asset_url('images/costume-bleu.svg')) ?>" alt="Lookbook costumes">
+                <img src="<?= e(media_url(array_value($categoryHeroImages, 'costumes', asset_url('images/costume-bleu.svg')))) ?>" alt="Lookbook costumes">
                 <div class="lookbook-frame-copy">
                     <span class="eyebrow">Costumes</span>
                     <h3>Tailoring iconique</h3>
                 </div>
             </article>
             <article class="lookbook-frame reveal-up">
-                <img src="<?= e(asset_url('images/sac-bleu.svg')) ?>" alt="Lookbook accessoires">
+                <img src="<?= e(media_url(array_value($categoryHeroImages, 'sacs', asset_url('images/sac-bleu.svg')))) ?>" alt="Lookbook accessoires">
                 <div class="lookbook-frame-copy">
                     <span class="eyebrow">Accessoires</span>
                     <h3>Objets de desir</h3>
@@ -246,7 +261,7 @@ $promotion = get_active_promotion($pdo);
                             <article class="product-card">
                                 <a class="product-card-link" href="<?= e(base_url('product-details.php?id=' . (int) $product['id'])) ?>">
                                     <div class="product-card-media">
-                                        <img src="<?= e($product['main_image']) ?>" alt="<?= e($product['name']) ?>">
+                                        <img src="<?= e(media_url($product['main_image'])) ?>" alt="<?= e($product['name']) ?>">
                                     </div>
                                     <div class="product-card-body">
                                         <h3><?= e($product['name']) ?></h3>
