@@ -2,7 +2,17 @@
 
 function e($value)
 {
-    return htmlspecialchars((string) $value, ENT_QUOTES, 'UTF-8');
+    $value = (string) $value;
+
+    if (preg_match('/(Ã.|Â.|â.)/u', $value) === 1) {
+        $converted = function_exists('iconv') ? @iconv('Windows-1252', 'UTF-8//IGNORE', $value) : false;
+
+        if ($converted !== false && $converted !== '') {
+            $value = $converted;
+        }
+    }
+
+    return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
 }
 
 function array_value($array, $key, $default = '')
@@ -28,6 +38,74 @@ function base_url($path = '')
 function asset_url($path)
 {
     return base_url('assets/' . ltrim((string) $path, '/'));
+}
+
+function uploads_relative_dir()
+{
+    return 'assets/images/uploads';
+}
+
+function uploads_absolute_dir()
+{
+    return ROOT_PATH . '/assets/images/uploads';
+}
+
+function ensure_uploads_directory()
+{
+    $directory = uploads_absolute_dir();
+
+    if (!is_dir($directory)) {
+        mkdir($directory, 0775, true);
+    }
+
+    return $directory;
+}
+
+function normalize_uploaded_filename($filename, $fallbackPrefix)
+{
+    $filename = trim((string) $filename);
+    $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+
+    if ($extension === '') {
+        $extension = 'jpg';
+    }
+
+    return $fallbackPrefix . '-' . date('YmdHis') . '-' . mt_rand(1000, 9999) . '.' . $extension;
+}
+
+function save_base64_image($encodedImage, $fallbackPrefix, $sourceFilename = '')
+{
+    $encodedImage = trim((string) $encodedImage);
+
+    if ($encodedImage === '') {
+        return '';
+    }
+
+    if (preg_match('#^data:image/([a-zA-Z0-9.+-]+);base64,#', $encodedImage, $matches) !== 1) {
+        return '';
+    }
+
+    $mimeExtension = strtolower($matches[1]);
+    $binary = base64_decode(substr($encodedImage, strpos($encodedImage, ',') + 1), true);
+
+    if ($binary === false || $binary === '') {
+        return '';
+    }
+
+    $extension = in_array($mimeExtension, array('jpeg', 'jpg', 'png', 'webp'), true) ? $mimeExtension : 'jpg';
+    if ($extension === 'jpeg') {
+        $extension = 'jpg';
+    }
+
+    ensure_uploads_directory();
+
+    $filename = normalize_uploaded_filename($sourceFilename, $fallbackPrefix);
+    $filename = preg_replace('/\.[a-z0-9]+$/i', '.' . $extension, $filename);
+    $absolutePath = uploads_absolute_dir() . '/' . $filename;
+
+    file_put_contents($absolutePath, $binary);
+
+    return uploads_relative_dir() . '/' . $filename;
 }
 
 function redirect($path)
@@ -466,6 +544,60 @@ function product_gallery($pdo, $productId, $fallbackImage)
     }
 
     return $images;
+}
+
+function sync_product_primary_gallery_image($pdo, $productId, $imagePath, $productName)
+{
+    $statement = $pdo->prepare('SELECT id FROM product_images WHERE product_id = ? ORDER BY sort_order ASC, id ASC LIMIT 1');
+    $statement->execute(array((int) $productId));
+    $image = $statement->fetch();
+
+    if ($image) {
+        $update = $pdo->prepare('UPDATE product_images SET image_path = ?, alt_text = ?, sort_order = 1 WHERE id = ?');
+        $update->execute(array($imagePath, $productName . ' - image principale', (int) $image['id']));
+        return;
+    }
+
+    $insert = $pdo->prepare('INSERT INTO product_images (product_id, image_path, alt_text, sort_order) VALUES (?, ?, ?, 1)');
+    $insert->execute(array((int) $productId, $imagePath, $productName . ' - image principale'));
+}
+
+function append_product_gallery_images($pdo, $productId, $productName, $galleryPayload)
+{
+    $galleryPayload = trim((string) $galleryPayload);
+
+    if ($galleryPayload === '') {
+        return;
+    }
+
+    $images = json_decode($galleryPayload, true);
+
+    if (!is_array($images) || empty($images)) {
+        return;
+    }
+
+    $sortStatement = $pdo->prepare('SELECT COALESCE(MAX(sort_order), 0) AS max_sort FROM product_images WHERE product_id = ?');
+    $sortStatement->execute(array((int) $productId));
+    $maxSort = (int) array_value($sortStatement->fetch(), 'max_sort', 0);
+
+    $insert = $pdo->prepare('INSERT INTO product_images (product_id, image_path, alt_text, sort_order) VALUES (?, ?, ?, ?)');
+
+    foreach ($images as $index => $image) {
+        $encoded = array_value($image, 'data', '');
+        $sourceName = array_value($image, 'name', 'gallery.jpg');
+        $imagePath = save_base64_image($encoded, 'gallery-' . (int) $productId, $sourceName);
+
+        if ($imagePath === '') {
+            continue;
+        }
+
+        $insert->execute(array(
+            (int) $productId,
+            $imagePath,
+            $productName . ' - galerie ' . ($maxSort + $index + 1),
+            $maxSort + $index + 1,
+        ));
+    }
 }
 
 function stock_state($stock)
