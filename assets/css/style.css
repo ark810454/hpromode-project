@@ -1357,6 +1357,14 @@ img {
     color: var(--muted);
 }
 
+.admin-gallery-remove {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.78rem;
+    color: var(--ink);
+}
+
 .admin-gallery-card.is-new span {
     color: var(--bordeaux);
     font-weight: 700;

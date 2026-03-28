@@ -59,39 +59,6 @@ function media_url($path, $fallback = '')
     return base_url(ltrim($path, '/'));
 }
 
-function uploads_relative_dir()
-{
-    return 'assets/images/uploads';
-}
-
-function uploads_absolute_dir()
-{
-    return ROOT_PATH . '/assets/images/uploads';
-}
-
-function ensure_uploads_directory()
-{
-    $directory = uploads_absolute_dir();
-
-    if (!is_dir($directory)) {
-        mkdir($directory, 0775, true);
-    }
-
-    return $directory;
-}
-
-function normalize_uploaded_filename($filename, $fallbackPrefix)
-{
-    $filename = trim((string) $filename);
-    $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
-
-    if ($extension === '') {
-        $extension = 'jpg';
-    }
-
-    return $fallbackPrefix . '-' . date('YmdHis') . '-' . mt_rand(1000, 9999) . '.' . $extension;
-}
-
 function save_base64_image($encodedImage, $fallbackPrefix, $sourceFilename = '')
 {
     $encodedImage = trim((string) $encodedImage);
@@ -116,15 +83,7 @@ function save_base64_image($encodedImage, $fallbackPrefix, $sourceFilename = '')
         $extension = 'jpg';
     }
 
-    ensure_uploads_directory();
-
-    $filename = normalize_uploaded_filename($sourceFilename, $fallbackPrefix);
-    $filename = preg_replace('/\.[a-z0-9]+$/i', '.' . $extension, $filename);
-    $absolutePath = uploads_absolute_dir() . '/' . $filename;
-
-    file_put_contents($absolutePath, $binary);
-
-    return uploads_relative_dir() . '/' . $filename;
+    return 'data:image/' . $extension . ';base64,' . base64_encode($binary);
 }
 
 function redirect($path)
@@ -571,7 +530,7 @@ function sync_user_session($pdo, $userId)
 
 function product_gallery($pdo, $productId, $fallbackImage)
 {
-    $statement = $pdo->prepare('SELECT image_path, alt_text FROM product_images WHERE product_id = ? ORDER BY sort_order ASC, id ASC');
+    $statement = $pdo->prepare('SELECT id, image_path, alt_text, sort_order FROM product_images WHERE product_id = ? ORDER BY sort_order ASC, id ASC');
     $statement->execute(array((int) $productId));
     $images = $statement->fetchAll();
 
@@ -598,6 +557,31 @@ function sync_product_primary_gallery_image($pdo, $productId, $imagePath, $produ
 
     $insert = $pdo->prepare('INSERT INTO product_images (product_id, image_path, alt_text, sort_order) VALUES (?, ?, ?, 1)');
     $insert->execute(array((int) $productId, $imagePath, $productName . ' - image principale'));
+}
+
+function ensure_media_storage_columns($pdo)
+{
+    static $checked = false;
+
+    if ($checked) {
+        return;
+    }
+
+    $checked = true;
+    $columns = array(
+        array('table' => 'products', 'column' => 'main_image'),
+        array('table' => 'product_images', 'column' => 'image_path'),
+    );
+
+    foreach ($columns as $column) {
+        $statement = $pdo->query('SHOW COLUMNS FROM ' . $column['table'] . " LIKE '" . $column['column'] . "'");
+        $definition = $statement ? $statement->fetch(PDO::FETCH_ASSOC) : null;
+        $type = strtolower((string) array_value($definition, 'Type', ''));
+
+        if (strpos($type, 'longtext') === false) {
+            $pdo->exec('ALTER TABLE ' . $column['table'] . ' MODIFY ' . $column['column'] . ' LONGTEXT NOT NULL');
+        }
+    }
 }
 
 function append_product_gallery_images($pdo, $productId, $productName, $galleryPayload)
@@ -636,6 +620,24 @@ function append_product_gallery_images($pdo, $productId, $productName, $galleryP
             $maxSort + $index + 1,
         ));
     }
+}
+
+function remove_product_gallery_images($pdo, $productId, $galleryIds)
+{
+    if (!is_array($galleryIds) || empty($galleryIds)) {
+        return;
+    }
+
+    $galleryIds = array_values(array_filter(array_map('intval', $galleryIds)));
+
+    if (empty($galleryIds)) {
+        return;
+    }
+
+    $placeholders = implode(',', array_fill(0, count($galleryIds), '?'));
+    $params = array_merge(array((int) $productId), $galleryIds);
+    $statement = $pdo->prepare("DELETE FROM product_images WHERE product_id = ? AND id IN ({$placeholders}) AND sort_order > 1");
+    $statement->execute($params);
 }
 
 function stock_state($stock)

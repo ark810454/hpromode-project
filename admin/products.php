@@ -4,6 +4,7 @@ require_once __DIR__ . '/../config/db.php';
 require_once __DIR__ . '/../includes/functions.php';
 
 require_admin();
+ensure_media_storage_columns($pdo);
 
 $editingProduct = null;
 $defaultProductImage = asset_url('images/product-default.svg');
@@ -26,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mainImageData = isset($_POST['main_image_data']) ? $_POST['main_image_data'] : '';
         $mainImageFilename = isset($_POST['main_image_filename']) ? $_POST['main_image_filename'] : 'main-image.jpg';
         $galleryImagesPayload = isset($_POST['gallery_images_data']) ? $_POST['gallery_images_data'] : '';
+        $removeGalleryIds = isset($_POST['remove_gallery_ids']) ? $_POST['remove_gallery_ids'] : array();
         $isFeatured = isset($_POST['is_featured']) ? 1 : 0;
         $isNew = isset($_POST['is_new']) ? 1 : 0;
         $isActive = isset($_POST['is_active']) ? 1 : 0;
@@ -54,6 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $categoryId, $name, $slug, $sku, $description, $price, $promoPrice, $stock,
                 $colorOptions, $sizeOptions, $mainImage, $isFeatured, $isNew, $isActive, $productId,
             ));
+            remove_product_gallery_images($pdo, $productId, $removeGalleryIds);
             sync_product_primary_gallery_image($pdo, $productId, $mainImage, $name);
             append_product_gallery_images($pdo, $productId, $name, $galleryImagesPayload);
             flash('success', 'Article mis à jour.');
@@ -166,7 +169,14 @@ require_once __DIR__ . '/includes_top.php';
                 </div>
                 <div class="col-12">
                     <label class="form-label">Image principale</label>
-                    <input type="text" name="main_image" class="form-control" value="<?= e(array_value($editingProduct, 'main_image', $defaultProductImage)) ?>" required data-main-image-path>
+                    <input type="hidden" name="main_image" value="<?= e(array_value($editingProduct, 'main_image', $defaultProductImage)) ?>" data-main-image-path>
+                    <input
+                        type="text"
+                        class="form-control"
+                        value="<?= e(strpos((string) array_value($editingProduct, 'main_image', ''), 'data:image/') === 0 ? 'Image enregistree en base de donnees' : array_value($editingProduct, 'main_image', $defaultProductImage)) ?>"
+                        readonly
+                        data-main-image-display
+                    >
                 </div>
                 <div class="col-12">
                     <div class="admin-media-panel" data-admin-image-editor>
@@ -210,10 +220,16 @@ require_once __DIR__ . '/includes_top.php';
                         Ajoutez plusieurs photos depuis votre galerie. Elles seront redimensionnées pour la boutique.
                     </p>
                     <div class="admin-gallery-grid mt-3" data-gallery-preview-list>
-                        <?php foreach ($productGallery as $galleryImage): ?>
+                        <?php foreach ($productGallery as $galleryIndex => $galleryImage): ?>
                             <div class="admin-gallery-card">
                                 <img src="<?= e(media_url($galleryImage['image_path'], $defaultProductImage)) ?>" alt="<?= e(array_value($galleryImage, 'alt_text', 'Galerie produit')) ?>">
-                                <span>Déjà publié</span>
+                                <span><?= $galleryIndex === 0 ? 'Image principale' : 'Deja publie' ?></span>
+                                <?php if ($galleryIndex > 0 && isset($galleryImage['id'])): ?>
+                                    <label class="admin-gallery-remove">
+                                        <input type="checkbox" name="remove_gallery_ids[]" value="<?= (int) $galleryImage['id'] ?>">
+                                        Retirer
+                                    </label>
+                                <?php endif; ?>
                             </div>
                         <?php endforeach; ?>
                     </div>

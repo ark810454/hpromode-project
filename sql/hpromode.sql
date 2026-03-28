@@ -55,7 +55,7 @@ CREATE TABLE products (
     stock INT NOT NULL DEFAULT 0,
     color_options VARCHAR(255) DEFAULT NULL,
     size_options VARCHAR(255) DEFAULT NULL,
-    main_image VARCHAR(255) NOT NULL,
+    main_image LONGTEXT NOT NULL,
     is_featured TINYINT(1) NOT NULL DEFAULT 0,
     is_new TINYINT(1) NOT NULL DEFAULT 1,
     is_active TINYINT(1) NOT NULL DEFAULT 1,
@@ -67,7 +67,7 @@ CREATE TABLE products (
 CREATE TABLE product_images (
     id INT AUTO_INCREMENT PRIMARY KEY,
     product_id INT NOT NULL,
-    image_path VARCHAR(255) NOT NULL,
+    image_path LONGTEXT NOT NULL,
     alt_text VARCHAR(255) DEFAULT NULL,
     sort_order INT NOT NULL DEFAULT 1,
     CONSTRAINT fk_product_images_product FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE

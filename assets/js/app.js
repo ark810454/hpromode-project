@@ -75,6 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const mainImageData = productMediaForm.querySelector('[data-main-image-data]');
         const mainImageFilename = productMediaForm.querySelector('[data-main-image-filename]');
         const mainImagePath = productMediaForm.querySelector('[data-main-image-path]');
+        const mainImageDisplay = productMediaForm.querySelector('[data-main-image-display]');
         const scaleInput = productMediaForm.querySelector('[data-crop-scale]');
         const offsetXInput = productMediaForm.querySelector('[data-crop-offset-x]');
         const offsetYInput = productMediaForm.querySelector('[data-crop-offset-y]');
@@ -139,7 +140,10 @@ document.addEventListener('DOMContentLoaded', () => {
             mainImagePreview.src = dataUrl;
             mainImageData.value = dataUrl;
             if (mainImagePath) {
-                mainImagePath.value = `assets/images/uploads/${mainEditorState.fileName || 'main-image.jpg'}`;
+                mainImagePath.value = dataUrl;
+            }
+            if (mainImageDisplay) {
+                mainImageDisplay.value = `Image recadree prete a etre enregistree (${mainEditorState.fileName || 'main-image.jpg'})`;
             }
         };
 
